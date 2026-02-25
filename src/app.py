@@ -9,6 +9,15 @@ from src.rag import answer_question
 
 load_dotenv()
 
+def to_dict(obj):
+    # Works for dataclasses, SimpleNamespace, and plain objects with __dict__
+    if hasattr(obj, "__dataclass_fields__"):
+        from dataclasses import asdict
+        return asdict(obj)
+    if hasattr(obj, "__dict__"):
+        return dict(obj.__dict__)
+    return dict(obj)
+
 app = Flask(__name__)
 
 INDEX_HTML = """
@@ -100,7 +109,7 @@ def chat():
 
     result = answer_question(question, top_k=5)
 
-    citations = [asdict(c) for c in result.citations]
+    citations = [to_dict(c) for c in result.citations]
     snippets = [
         {
             "chunk_id": c.chunk_id,
