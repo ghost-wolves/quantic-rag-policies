@@ -1,4 +1,3 @@
-<<'EOF'
 from dataclasses import dataclass
 
 @dataclass(frozen=True)
@@ -14,4 +13,3 @@ class Settings:
     top_k: int = 5
 
 settings = Settings()
-EOF
