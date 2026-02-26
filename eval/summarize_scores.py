@@ -51,3 +51,6 @@ def main() -> None:
         encoding="utf-8",
     )
     print(f"Wrote: {report.as_posix()}")
+
+if __name__ == "__main__":
+    main()
